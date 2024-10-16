@@ -6,11 +6,13 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:50:24 by luiribei          #+#    #+#             */
-/*   Updated: 2024/10/15 12:52:47 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:41:55 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx/mlx.h"
+// #include "minilibx_linux/mlx.h"
+#include "minilibx_mac/mlx.h"
+// #include <X11/keysym.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -85,14 +87,20 @@ int	main (void)
 	data = NULL;
 	data = malloc(sizeof(t_data));
 
+	data->img = malloc(sizeof(t_data));
 	data->box_x = 0;
 	data->box_y = 0;
+	
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "hi");
 
 	mlx_loop_hook(data->mlx, render_square, data);
+	mlx_xpm_file_to_image();
+	
+	
 	mlx_hook(data->mlx_win, 2, 0, keys, data);
 	mlx_loop(data->mlx);
 }
 
-// cc main.c libmlx.a -framework AppKit -framework OpenGL
+//	MAC		cc -Wall -Wextra -Werror main.c minilibx_mac/libmlx.a -framework AppKit -framework OpenGL
+//	LINUX	cc -Wall -Wextra -Werror main.c minilibx-linux/libmlx.a -Iminilibx-linux -lXext -lX11 -lm -lz
