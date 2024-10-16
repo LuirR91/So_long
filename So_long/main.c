@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 18:50:24 by luiribei          #+#    #+#             */
-/*   Updated: 2024/10/16 13:41:55 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:32:45 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int	main (void)
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "hi");
 
 	mlx_loop_hook(data->mlx, render_square, data);
-	mlx_xpm_file_to_image();
-	
 	
 	mlx_hook(data->mlx_win, 2, 0, keys, data);
 	mlx_loop(data->mlx);
