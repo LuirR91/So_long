@@ -15,11 +15,7 @@ MLXFLAGS	=	-Iminilibx-linux -lXext -lX11 -lm -lz
 RM			= rm -f
 
 SO_LONG_DIR			=	$(SRC_DIR)main.c \
-								$(SRC_DIR) \
-								$(SRC_DIR) \
-								$(SRC_DIR) \
-								$(SRC_DIR) \
-								$(SRC_DIR) \
+								$(SRC_DIR)window.c \
 
 SRCS				=	$(SO_LONG_DIR)
 
@@ -58,5 +54,4 @@ re:					fclean all
 					@echo "Performing a full rebuild..."
 					@$(MAKE) all
 
-# Phony targets represent actions/commands not files
 .PHONY:	all clean fclean re

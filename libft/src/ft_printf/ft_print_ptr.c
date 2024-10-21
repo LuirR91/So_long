@@ -6,13 +6,13 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:01:40 by luiribei          #+#    #+#             */
-/*   Updated: 2024/05/27 15:26:04 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:29:40 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_ptr_len(uintptr_t num)
+int	ft_ptr_len(unsigned long long num)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	ft_ptr_len(uintptr_t num)
 	return (i);
 }
 
-void	ft_put_ptr(uintptr_t num)
+void	ft_put_ptr(unsigned long long num)
 {
 	if (num >= 16)
 	{

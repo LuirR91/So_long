@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:29:32 by luiribei          #+#    #+#             */
-/*   Updated: 2024/06/21 13:52:24 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:24:18 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 	char		*current_line;
 	int			read_bytes;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
 		return (NULL);
 	current_line = NULL;
 	while (ft_is_newline(current_line) == -1)
