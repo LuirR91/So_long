@@ -16,6 +16,7 @@ RM			= rm -f
 
 SO_LONG_DIR			=	$(SRC_DIR)main.c \
 								$(SRC_DIR)window.c \
+								$(SRC_DIR)img.c \
 
 SRCS				=	$(SO_LONG_DIR)
 
