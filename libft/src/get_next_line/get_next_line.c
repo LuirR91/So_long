@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:29:32 by luiribei          #+#    #+#             */
-/*   Updated: 2024/10/21 14:24:18 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:57:26 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_next_line(int fd)
 			}
 			read_content[read_bytes] = '\0';
 		}
-		current_line = ft_strjoin(current_line, read_content);
+		current_line = ft_gnl_strjoin(current_line, read_content);
 		ft_clean (current_line, read_content);
 	}
 	return (current_line);

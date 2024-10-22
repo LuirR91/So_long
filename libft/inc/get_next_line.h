@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:32:47 by luiribei          #+#    #+#             */
-/*   Updated: 2024/06/18 16:07:15 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:57:09 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_strlen(char *str);
+char	*ft_gnl_strjoin(char *s1, char *s2);
 int		ft_is_newline(char *str);
 void	*ft_clean(char *current_line, char *read_content);
 

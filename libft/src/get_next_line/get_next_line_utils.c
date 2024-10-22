@@ -6,26 +6,26 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:56:22 by luiribei          #+#    #+#             */
-/*   Updated: 2024/06/25 11:52:20 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/22 13:59:57 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
+static int	ft_gnl_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	if (s)
+	if (str)
 	{
-		while (s[i])
+		while (str[i])
 			i++;
 	}
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, char *s2)
 {
 	int		len_s1;
 	int		len_s2;
@@ -33,8 +33,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 	char	*s_final;
 
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
+	len_s1 = ft_gnl_strlen(s1);
+	len_s2 = ft_gnl_strlen(s2);
 	s_final = (char *)malloc(len_s1 + len_s2 + 1);
 	if (s_final == NULL)
 		return (NULL);
