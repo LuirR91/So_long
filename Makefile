@@ -11,7 +11,7 @@ OBJ_DIR = obj/
 # Compiler and CFlags
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -I$(INC)
-MLXFLAGS	=	-Iminilibx-linux -lXext -lX11 -lm -lz
+MLXFLAGS	= -Iminilibx-linux -lXext -lX11 -lm -lz
 RM			= rm -f
 
 SO_LONG_DIR			=	$(SRC_DIR)main.c \

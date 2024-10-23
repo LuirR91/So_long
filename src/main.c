@@ -1,27 +1,9 @@
 #include "../inc/so_long.h"
 
-void	draw_square(t_square square, t_img *img)
-{
-	unsigned short int	i;
-	unsigned short int	j;
-
-	i = 0;
-	while (i < square.size && i < img->h)
-	{
-		j = 0;
-		while (j < square.size && j < img->w)
-		{
-			put_pixel_img(img, j + square.x, i + square.y, square.color);
-			j++;
-		}
-		i++;
-	}
-}
-
 int	main()
 {
-	t_window	*win;
-	t_img		*img;
+	t_game	*win;
+	t_image		*img;
 
 	win = new_window(1080, 1920, "hhey");
 	if (!win)
@@ -29,15 +11,11 @@ int	main()
 	img = new_image(win, 1080, 1920);
 	if (!img)
 		return (-1);
-	//draw_square((t_square){0, 0, 300, 0x00FFFF}, img);
-	//mlx_put_image_to_window(image.win.mlx_ptr, image.win.win_ptr, image.img_ptr, 0, 0);
-	mlx_hook(win->win_ptr, 2, 1L<<0, continuous_read_keys, img);
-	mlx_key_hook (win->win_ptr, read_keys, img);
-    mlx_mouse_hook (win->win_ptr, read_mouse, img);
-	mlx_hook(win->win_ptr, 17, 0, exit_program, img);
-	mlx_hook(win->win_ptr, 6, 0, follow_mouse, img);
+	mlx_key_hook (win->win, read_keys, img);
+	mlx_mouse_hook (win->win, read_mouse, img);
+	mlx_hook(win->win, 17, 0, exit_program, img);
 
-	mlx_loop(win->mlx_ptr);
+	mlx_loop(win->mlx);
 	free(win);
 	free(img);
 	return (0);
