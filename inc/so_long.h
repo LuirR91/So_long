@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:18:50 by luiribei          #+#    #+#             */
-/*   Updated: 2024/10/23 16:55:18 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:40:34 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define PLAYER				'P'
 # define MAP_EXIT			'E'
 
+# define SPEED				10
+
 # define W					119
 # define A					97
 # define S					115
@@ -41,6 +43,7 @@
 # define DOWN				65364
 
 # define ESC				65307
+# define Q					113
 
 # define WALL_XPM			"assets/sprites/wall.xpm"
 # define FLOOR_XPM			"assets/sprites/floor.xpm"
@@ -56,13 +59,21 @@ typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
-	int		height;
-	int		width;
+	char	**map;
+	int		map_w;
+	int		map_h;
+	int		img_player;
+	int		img_w;
+	int		img_h;
+	int		x_player;
+	int		y_player;
+	int		moves;
+	int		endgame;
 }		t_game;
 
-typedef struct s_image
+/* typedef struct s_image
 {
-	t_game	game;
+	t_game	*game;
 	void	*img_ptr;
 	char	*addr;
 	int		h;
@@ -70,14 +81,11 @@ typedef struct s_image
 	int		bpp;
 	int		endian;
 	int		line_len;
-}		t_image;
+}		t_image; */
 
-//	Window and Images
-void		my_mlx_pixel_put(t_image *img, int x, int y, int color);
-t_image		*new_image(t_game *win, int height, int width);
-t_game	*new_window(int height, int width, char *str);
-
-//	Hooks
-int	exit_program (t_image	*img);
+// Functions
+int	exit_game(t_game *game);
+void	game_init(t_game *game);
+void	gameplay(t_game *game);
 
 #endif

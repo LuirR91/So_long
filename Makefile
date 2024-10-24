@@ -15,8 +15,8 @@ MLXFLAGS	= -Iminilibx-linux -lXext -lX11 -lm -lz
 RM			= rm -f
 
 SO_LONG_DIR			=	$(SRC_DIR)main.c \
-								$(SRC_DIR)window_and_images.c \
-								$(SRC_DIR)drawing.c \
+								$(SRC_DIR)init.c \
+								$(SRC_DIR)gameplay.c \
 								$(SRC_DIR)exit.c \
 
 SRCS				=	$(SO_LONG_DIR)
