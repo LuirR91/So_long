@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:18:50 by luiribei          #+#    #+#             */
-/*   Updated: 2024/10/24 13:40:34 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:27:26 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+# define WIDHT 1920
+# define HEIGHT 1080
+
 # define WALL				'1'
 # define FLOOR				'0'
 # define COLLECTABLE		'C'
@@ -31,19 +34,6 @@
 # define MAP_EXIT			'E'
 
 # define SPEED				10
-
-# define W					119
-# define A					97
-# define S					115
-# define D					100
-
-# define UP					65362
-# define LEFT				65361
-# define RIGHT				65363
-# define DOWN				65364
-
-# define ESC				65307
-# define Q					113
 
 # define WALL_XPM			"assets/sprites/wall.xpm"
 # define FLOOR_XPM			"assets/sprites/floor.xpm"
@@ -60,32 +50,31 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	char	**map;
-	int		map_w;
-	int		map_h;
-	int		img_player;
-	int		img_w;
-	int		img_h;
+	void	*img_player;
+	void	*img_floor;
+	void	*img_wall;
+	void	*img_collectable;
+	void	*img_exit;
+	
+	int		img_width;
+	int		img_height;
+	
 	int		x_player;
 	int		y_player;
+	
 	int		moves;
-	int		endgame;
 }		t_game;
 
-/* typedef struct s_image
-{
-	t_game	*game;
-	void	*img_ptr;
-	char	*addr;
-	int		h;
-	int		w;
-	int		bpp;
-	int		endian;
-	int		line_len;
-}		t_image; */
-
 // Functions
-int	exit_game(t_game *game);
+
 void	game_init(t_game *game);
 void	gameplay(t_game *game);
+int	draw_game(t_game *game);
+int	exit_game(t_game *game);
+
+void	w_key(t_game *game);
+void	s_key(t_game *game);
+void	d_key(t_game *game);
+void	a_key(t_game *game);
 
 #endif

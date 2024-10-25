@@ -17,7 +17,9 @@ RM			= rm -f
 SO_LONG_DIR			=	$(SRC_DIR)main.c \
 								$(SRC_DIR)init.c \
 								$(SRC_DIR)gameplay.c \
+								$(SRC_DIR)draw.c \
 								$(SRC_DIR)exit.c \
+								$(SRC_DIR)player_update.c \
 
 SRCS				=	$(SO_LONG_DIR)
 

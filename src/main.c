@@ -1,6 +1,6 @@
 #include "../inc/so_long.h"
 
-static int	argv_checker(char *argv)
+/* static int	argv_checker(char *argv)
 {
 	int	i;
 
@@ -14,17 +14,16 @@ static int	argv_checker(char *argv)
 		&& argv[i - 2] == 'b' && argv [i - 3] == '.')
 		return (1);
 	return (0);
-}
+} */
 
 int	main()
 {
 	t_game	game;
 
+	game.mlx = mlx_init();
 	game_init(&game);
 	gameplay(&game);
-
 	mlx_loop(game.mlx);
-	free(game.mlx);
 	return (0);
 }
 

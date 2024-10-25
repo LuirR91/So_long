@@ -2,37 +2,41 @@
 
 static void	game_events(int	keycode, t_game *game)
 {
-	if (keycode == W || keycode == UP)
+	if (keycode == XK_w || keycode == XK_Up)
 	{
+		write(1, "w\n", 2);
 		game->y_player -= SPEED;
-		player_w(game);
+		w_key(game);
 	}
-	else if (keycode == S || keycode == DOWN)
+	if (keycode == XK_s || keycode == XK_Down)
 	{
+		write(1, "s\n", 2);
 		game->y_player += SPEED;
-		player_s(game);
+		s_key(game);
 	}
-	else if (keycode == D || keycode == RIGHT)
+	if (keycode == XK_a || keycode == XK_Left)
 	{
-		game->x_player += SPEED;
-		player_d(game);
-	}
-	else if (keycode == A || keycode == LEFT)
-	{
+		write(1, "a\n", 2);
 		game->x_player -= SPEED;
-		player_a(game);
+		d_key(game);
+	}
+	if (keycode == XK_d || keycode == XK_Right)
+	{
+		write(1, "d\n", 2);
+		game->x_player += SPEED;
+		a_key(game);
 	}
 }
 
 static int	keypress(int keycode, t_game *game)
 {
-	if (keycode == ESC || keycode == Q)
-		exit_game(game);
-	else if (!game->endgame)
+	if (keycode == XK_Escape || keycode == XK_q)
 	{
-		game_events(keycode, game);
-		printf("Moves: %d\n", game->moves);
+		ft_printf("Cant beat the game? srsly?\n");
+		exit_game(game);
 	}
+	//mlx_clear_window(game->mlx, game->win);
+	game_events(keycode, game);
 	return (0);
 }
 
