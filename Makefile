@@ -10,7 +10,7 @@ OBJ_DIR = obj/
 
 # Compiler and CFlags
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I$(INC)
+CFLAGS		= -Wall -Wextra -Werror -O3 -g -I$(INC)
 MLXFLAGS	= -Iminilibx-linux -lXext -lX11 -lm -lz
 RM			= rm -f
 
