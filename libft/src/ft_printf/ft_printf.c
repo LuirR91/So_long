@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:59:11 by luiribei          #+#    #+#             */
-/*   Updated: 2024/05/27 15:32:34 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/11/04 14:49:05 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-		{	
+		{
 			format++;
 			if (!*format)
 				return (len);
