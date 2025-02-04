@@ -6,59 +6,81 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 15:15:54 by luiribei          #+#    #+#             */
-/*   Updated: 2024/11/03 15:15:55 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:55:01 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	put_img(t_game *game, void *img, int x, int y)
+static void	put_img(t_g *g, void *img, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->win, img, x * 64, y * 64);
+	mlx_put_image_to_window(g->mlx, g->win, img, x * 64, y * 64);
 }
 
-static void	put_player(t_game *game, void *img, int x, int y)
+static void	put_player(t_g *g, void *img, int x, int y)
 {
-	game->x_player = x;
-	game->y_player = y;
-	put_img(game, img, x, y);
+	g->xp = x;
+	g->yp = y;
+	put_img(g, img, x, y);
 }
 
-static void	put_exit(t_game *game, int x, int y)
+static void	put_exit(t_g *g, int x, int y)
 {
-	if (game->n_c == 0)
+	if (g->n_c == 0)
 	{
-		mlx_destroy_image(game->mlx, game->img_exit);
-		game->img_exit = mlx_xpm_file_to_image(game->mlx, \
-			EXIT_OPEN_XPM, &game->img_width, &game->img_height);
+		mlx_destroy_image(g->mlx, g->img_exit);
+		g->img_exit = mlx_xpm_file_to_image(g->mlx, \
+			EXIT_OPEN_XPM, &g->img_width, &g->img_height);
 	}
-	put_img(game, game->img_exit, x, y);
+	put_img(g, g->img_exit, x, y);
 }
 
-int	draw_game(t_game *game)
+static void	draw_extra_g(t_g *g)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (game->map[y])
+	while (g->map[y])
 	{
 		x = 0;
-		while (game->map[y][x])
+		while (g->map[y][x])
 		{
-			if (game->map[y][x] == '1')
-				put_img(game, game->img_wall, x, y);
-			else if (game->map[y][x] == '0')
-				put_img(game, game->img_floor, x, y);
-			else if (game->map[y][x] == 'C')
-				put_img(game, game->img_collectable, x, y);
-			else if (game->map[y][x] == 'P')
-				put_player(game, game->img_player, x, y);
-			else if (game->map[y][x] == 'E')
-				put_exit(game, x, y);
+			if (g->map[y][x] == '1')
+				put_img(g, g->img_wall, x, y);
+			else if (g->map[y][x] == '0')
+				put_img(g, g->img_floor, x, y);
+			else if (g->map[y][x] == 'C')
+				put_img(g, g->img_collectable, x, y);
+			else if (g->map[y][x] == 'K')
+				put_img(g, g->img_collectable_kill, x, y);
+			else if (g->map[y][x] == 'F')
+				put_img(g, g->img_floor_update, x, y);
 			x++;
 		}
 		y++;
 	}
+}
+
+int	draw_g(t_g *g)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (g->map[y])
+	{
+		x = 0;
+		while (g->map[y][x])
+		{
+			if (g->map[y][x] == 'P')
+				put_player(g, g->img_player, x, y);
+			else if (g->map[y][x] == 'E')
+				put_exit(g, x, y);
+			x++;
+		}
+		y++;
+	}
+	draw_extra_g(g);
 	return (0);
 }

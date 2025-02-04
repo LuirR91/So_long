@@ -6,47 +6,51 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 15:15:44 by luiribei          #+#    #+#             */
-/*   Updated: 2024/11/04 14:31:06 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:31:16 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	init_img(t_game *game)
+static void	init_img(t_g *g)
 {
-	game->img_floor = mlx_xpm_file_to_image(game->mlx, \
-		FLOOR_XPM, &game->img_width, &game->img_height);
-	game->img_wall = mlx_xpm_file_to_image(game->mlx, \
-		WALL_XPM, &game->img_width, &game->img_height);
-	game->img_player = mlx_xpm_file_to_image(game->mlx, \
-		PLAYER_FRONT_XPM, &game->img_width, &game->img_height);
-	game->img_collectable = mlx_xpm_file_to_image(game->mlx, \
-		COLLECTABLE_XPM, &game->img_width, &game->img_height);
-	game->img_exit = mlx_xpm_file_to_image(game->mlx, \
-		EXIT_CLOSED_XPM, &game->img_width, &game->img_height);
+	g->img_floor = mlx_xpm_file_to_image(g->mlx, \
+		FLOOR_XPM, &g->img_width, &g->img_height);
+	g->img_floor_update = mlx_xpm_file_to_image(g->mlx, \
+		FLOOR_UPDATE_XPM, &g->img_width, &g->img_height);
+	g->img_wall = mlx_xpm_file_to_image(g->mlx, \
+		WALL_XPM, &g->img_width, &g->img_height);
+	g->img_player = mlx_xpm_file_to_image(g->mlx, \
+		PLAYER_FRONT_XPM, &g->img_width, &g->img_height);
+	g->img_collectable = mlx_xpm_file_to_image(g->mlx, \
+		COLLECTABLE_XPM, &g->img_width, &g->img_height);
+	g->img_collectable_kill = mlx_xpm_file_to_image(g->mlx, \
+		COLLECTABLE_KILL_XPM, &g->img_width, &g->img_height);
+	g->img_exit = mlx_xpm_file_to_image(g->mlx, \
+		EXIT_CLOSED_XPM, &g->img_width, &g->img_height);
 }
 
-void	get_win_size(t_game *game)
+void	get_win_size(t_g *g)
 {
-	int	x;
+	int	y;
 
-	game->map_width = ft_strlen(game->map[0]) * 64;
-	x = 0;
-	while (game->map[x])
-		x++;
-	game->map_height = x * 64;
-	if (game->map_width > game->screen_width || \
-		game->map_height > (game->screen_height - 64))
-		print_error("Map is too big for the screen.", game);
+	g->map_width = ft_strlen(g->map[0]) * 64;
+	y = 0;
+	while (g->map[y])
+		y++;
+	g->map_height = y * 64;
+	if (g->map_width > g->screen_width || \
+		g->map_height > g->screen_height)
+		print_error("Map is too big for the screen.", g);
 }
 
-void	game_init(t_game *game)
+void	g_init(t_g *g)
 {
-	get_win_size(game);
-	game->win = mlx_new_window(game->mlx, game->map_width, \
-		game->map_height, "so_long");
-	game->moves = 0;
-	game->finish = 0;
-	init_img(game);
-	draw_game(game);
+	get_win_size(g);
+	g->win = mlx_new_window(g->mlx, g->map_width, \
+		g->map_height, "so_long");
+	g->moves = 0;
+	g->finish = 0;
+	init_img(g);
+	draw_g(g);
 }

@@ -6,50 +6,50 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 15:15:39 by luiribei          #+#    #+#             */
-/*   Updated: 2024/11/03 15:20:21 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:26:44 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	events(int keycode, t_game *game)
+static void	events(int keycode, t_g *g)
 {
 	if (keycode == XK_w || keycode == XK_Up)
 	{
-		game->y_player -= 1;
-		w_key(game);
+		g->yp -= 1;
+		w_key(g);
 	}
 	if (keycode == XK_s || keycode == XK_Down)
 	{
-		game->y_player += 1;
-		s_key(game);
+		g->yp += 1;
+		s_key(g);
 	}
 	if (keycode == XK_a || keycode == XK_Left)
 	{
-		game->x_player -= 1;
-		a_key(game);
+		g->xp -= 1;
+		a_key(g);
 	}
 	if (keycode == XK_d || keycode == XK_Right)
 	{
-		game->x_player += 1;
-		d_key(game);
+		g->xp += 1;
+		d_key(g);
 	}
 }
 
-static int	ft_keycode(int keycode, t_game *game)
+static int	ft_keycode(int keycode, t_g *g)
 {
 	if (keycode == XK_Escape)
 	{
-		ft_printf("You din't finish the game :(\n");
-		exit_game(game);
+		ft_printf("You din't finish the g :(\n");
+		exit_g(g);
 	}
-	else if (!game->finish)
-		events(keycode, game);
+	else if (!g->finish)
+		events(keycode, g);
 	return (0);
 }
 
-void	gameplay(t_game *game)
+void	gplay(t_g *g)
 {
-	mlx_hook(game->win, 2, 1L << 0, ft_keycode, game);
-	mlx_hook(game->win, 17, 1L << 17, exit_game, game);
+	mlx_hook(g->win, 2, 1L << 0, ft_keycode, g);
+	mlx_hook(g->win, 17, 1L << 17, exit_g, g);
 }

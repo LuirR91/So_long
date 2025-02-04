@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 15:15:34 by luiribei          #+#    #+#             */
-/*   Updated: 2024/11/04 14:31:21 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:26:44 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,23 @@ static int	check_argv(char	*argv)
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_g	g;
 
-	ft_bzero(&game, sizeof(t_game));
+	ft_bzero(&g, sizeof(t_g));
 	if (argc == 2)
 	{
-		game.mlx = mlx_init();
-		game.map = map_read(argv[1], &game);
-		game.map_copy = map_read(argv[1], &game);
-		mlx_get_screen_size(game.mlx, &game.screen_width, &game.screen_height);
-		if (check_argv(argv[1]) && check_map(&game))
+		g.mlx = mlx_init();
+		g.map = map_read(argv[1], &g);
+		g.map_copy = map_read(argv[1], &g);
+		mlx_get_screen_size(g.mlx, &g.screen_width, &g.screen_height);
+		if (check_argv(argv[1]) && check_map(&g))
 		{
-			game_init(&game);
-			gameplay(&game);
-			mlx_loop(game.mlx);
+			g_init(&g);
+			gplay(&g);
+			mlx_loop(g.mlx);
 		}
 		else
-			print_error("Invalid map.", &game);
+			print_error("Invalid map.", &g);
 	}
 	else
 		ft_printf("Bad syntax:\n./so_long ./maps/<map>.ber.\n");

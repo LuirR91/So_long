@@ -6,133 +6,141 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 15:15:23 by luiribei          #+#    #+#             */
-/*   Updated: 2024/11/04 11:42:01 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:53:30 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-static void	player_img_update(char key, t_game *game)
+static void	player_img_update(char key, t_g *g)
 {
-	mlx_destroy_image(game->mlx, game->img_player);
+	mlx_destroy_image(g->mlx, g->img_player);
 	if (key == 'w')
-		game->img_player = mlx_xpm_file_to_image
-			(game->mlx, PLAYER_BACK_XPM, &game->img_width, &game->img_height);
+		g->img_player = mlx_xpm_file_to_image
+			(g->mlx, PLAYER_BACK_XPM, &g->img_width, &g->img_height);
 	else if (key == 's')
-		game->img_player = mlx_xpm_file_to_image
-			(game->mlx, PLAYER_FRONT_XPM, &game->img_width, &game->img_height);
+		g->img_player = mlx_xpm_file_to_image
+			(g->mlx, PLAYER_FRONT_XPM, &g->img_width, &g->img_height);
 	else if (key == 'a')
-		game->img_player = mlx_xpm_file_to_image
-			(game->mlx, PLAYER_LEFT_XPM, &game->img_width, &game->img_height);
+		g->img_player = mlx_xpm_file_to_image
+			(g->mlx, PLAYER_LEFT_XPM, &g->img_width, &g->img_height);
 	else if (key == 'd')
-		game->img_player = mlx_xpm_file_to_image
-			(game->mlx, PLAYER_RIGHT_XPM, &game->img_width, &game->img_height);
+		g->img_player = mlx_xpm_file_to_image
+			(g->mlx, PLAYER_RIGHT_XPM, &g->img_width, &g->img_height);
 }
 
-void	w_key(t_game *game)
+void	w_key(t_g *g)
 {
-	player_img_update('w', game);
-	if (game->map[game->y_player][game->x_player] == 'E' && game->n_c == 0)
+	player_img_update('w', g);
+	if (g->map[g->yp][g->xp] == 'E' && g->n_c == 0)
 	{
-		game->map[game->y_player + 1][game->x_player] = '0';
-		game->finish = 1;
-		print_win(game);
+		g->map[g->yp + 1][g->xp] = '0';
+		g->finish = 1;
+		print_win(g);
 	}
-	else if (game->map[game->y_player][game->x_player] == '1' || \
-		game->map[game->y_player][game->x_player] == 'E')
+	else if (g->map[g->yp][g->xp] == '1' || g->map[g->yp][g->xp] == 'E')
 	{
-		game->y_player += 1;
-		draw_game(game);
+		g->yp += 1;
+		draw_g(g);
 	}
 	else
 	{
-		if (game->map[game->y_player][game->x_player] == 'C')
-			game->n_c -= 1;
-		game->map[game->y_player][game->x_player] = 'P';
-		game->map[game->y_player + 1][game->x_player] = '0';
-		game->moves++;
-		ft_printf("%d\n", game->moves);
-		draw_game(game);
+		g->map[g->yp + 1][g->xp] = 'F';
+		if (g->map[g->yp][g->xp] == 'C')
+		{
+			g->n_c -= 1;
+			g->map[g->yp + 1][g->xp] = 'K';
+		}
+		g->map[g->yp][g->xp] = 'P';
+		g->moves++;
+		ft_printf("%d\n", g->moves);
+		draw_g(g);
 	}
 }
 
-void	s_key(t_game *game)
+void	s_key(t_g *g)
 {
-	player_img_update('s', game);
-	if (game->map[game->y_player][game->x_player] == 'E' && game->n_c == 0)
+	player_img_update('s', g);
+	if (g->map[g->yp][g->xp] == 'E' && g->n_c == 0)
 	{
-		game->map[game->y_player - 1][game->x_player] = '0';
-		game->finish = 1;
-		print_win(game);
+		g->map[g->yp - 1][g->xp] = '0';
+		g->finish = 1;
+		print_win(g);
 	}
-	else if (game->map[game->y_player][game->x_player] == '1' || \
-		game->map[game->y_player][game->x_player] == 'E')
+	else if (g->map[g->yp][g->xp] == '1' || g->map[g->yp][g->xp] == 'E')
 	{
-		game->y_player -= 1;
-		draw_game(game);
+		g->yp -= 1;
+		draw_g(g);
 	}
 	else
 	{
-		if (game->map[game->y_player][game->x_player] == 'C')
-			game->n_c -= 1;
-		game->map[game->y_player][game->x_player] = 'P';
-		game->map[game->y_player - 1][game->x_player] = '0';
-		game->moves++;
-		ft_printf("%d\n", game->moves);
-		draw_game(game);
+		g->map[g->yp - 1][g->xp] = 'F';
+		if (g->map[g->yp][g->xp] == 'C')
+		{
+			g->n_c -= 1;
+			g->map[g->yp - 1][g->xp] = 'K';
+		}
+		g->map[g->yp][g->xp] = 'P';
+		g->moves++;
+		ft_printf("%d\n", g->moves);
+		draw_g(g);
 	}
 }
 
-void	a_key(t_game *game)
+void	a_key(t_g *g)
 {
-	player_img_update('a', game);
-	if (game->map[game->y_player][game->x_player] == 'E' && game->n_c == 0)
+	player_img_update('a', g);
+	if (g->map[g->yp][g->xp] == 'E' && g->n_c == 0)
 	{
-		game->map[game->y_player][game->x_player + 1] = '0';
-		game->finish = 1;
-		print_win(game);
+		g->map[g->yp][g->xp + 1] = '0';
+		g->finish = 1;
+		print_win(g);
 	}
-	else if (game->map[game->y_player][game->x_player] == '1' || \
-		game->map[game->y_player][game->x_player] == 'E')
+	else if (g->map[g->yp][g->xp] == '1' || g->map[g->yp][g->xp] == 'E')
 	{
-		game->x_player += 1;
-		draw_game(game);
+		g->xp += 1;
+		draw_g(g);
 	}
 	else
 	{
-		if (game->map[game->y_player][game->x_player] == 'C')
-			game->n_c -= 1;
-		game->map[game->y_player][game->x_player] = 'P';
-		game->map[game->y_player][game->x_player + 1] = '0';
-		game->moves++;
-		ft_printf("%d\n", game->moves);
-		draw_game(game);
+		g->map[g->yp][g->xp + 1] = 'F';
+		if (g->map[g->yp][g->xp] == 'C')
+		{
+			g->n_c -= 1;
+			g->map[g->yp][g->xp + 1] = 'K';
+		}
+		g->map[g->yp][g->xp] = 'P';
+		g->moves++;
+		ft_printf("%d\n", g->moves);
+		draw_g(g);
 	}
 }
 
-void	d_key(t_game *game)
+void	d_key(t_g *g)
 {
-	player_img_update('d', game);
-	if (game->map[game->y_player][game->x_player] == 'E' && game->n_c == 0)
+	player_img_update('d', g);
+	if (g->map[g->yp][g->xp] == 'E' && g->n_c == 0)
 	{
-		game->map[game->y_player][game->x_player - 1] = '0';
-		game->finish = 1;
-		print_win(game);
+		g->map[g->yp][g->xp - 1] = '0';
+		g->finish = 1;
+		print_win(g);
 	}
-	else if (game->map[game->y_player][game->x_player] == '1' || \
-		game->map[game->y_player][game->x_player] == 'E')
+	else if (g->map[g->yp][g->xp] == '1' || g->map[g->yp][g->xp] == 'E')
 	{
-		game->x_player -= 1;
-		draw_game(game);
+		g->xp -= 1;
+		draw_g(g);
 	}
 	else
 	{
-		if (game->map[game->y_player][game->x_player] == 'C')
-			game->n_c -= 1;
-		game->map[game->y_player][game->x_player] = 'P';
-		game->map[game->y_player][game->x_player - 1] = '0';
-		game->moves++;
-		ft_printf("%d\n", game->moves);
-		draw_game(game);
+		g->map[g->yp][g->xp - 1] = 'F';
+		if (g->map[g->yp][g->xp] == 'C')
+		{
+			g->n_c -= 1;
+			g->map[g->yp][g->xp - 1] = 'K';
+		}
+		g->map[g->yp][g->xp] = 'P';
+		g->moves++;
+		ft_printf("%d\n", g->moves);
+		draw_g(g);
 	}
 }

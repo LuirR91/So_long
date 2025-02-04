@@ -6,7 +6,7 @@
 /*   By: luiribei <luiribei@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:18:50 by luiribei          #+#    #+#             */
-/*   Updated: 2024/11/04 14:51:48 by luiribei         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:32:47 by luiribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,27 @@
 # include <limits.h>
 # include <stdbool.h>
 
-# define WALL				'1'
-# define FLOOR				'0'
-# define COLLECTABLE		'C'
-# define PLAYER				'P'
-# define MAP_EXIT			'E'
+# define WALL					'1'
+# define FLOOR					'0'
+# define COLLECTABLE			'C'
+# define PLAYER					'P'
+# define MAP_EXIT				'E'
+# define KILL_UPDATE			'K'
+# define FLOOR_UPDATE			'F'
 
-# define WALL_XPM			"assets/sprites/wall.xpm"
-# define FLOOR_XPM			"assets/sprites/floor.xpm"
-# define COLLECTABLE_XPM	"assets/sprites/collectable.xpm"
-# define PLAYER_FRONT_XPM	"assets/sprites/player/front.xpm"
-# define PLAYER_LEFT_XPM	"assets/sprites/player/left.xpm"
-# define PLAYER_RIGHT_XPM	"assets/sprites/player/right.xpm"
-# define PLAYER_BACK_XPM	"assets/sprites/player/back.xpm"
-# define EXIT_OPEN_XPM		"assets/sprites/exit-opened.xpm"
-# define EXIT_CLOSED_XPM	"assets/sprites/exit-closed.xpm"
+# define WALL_XPM				"assets/sprites/wall.xpm"
+# define FLOOR_XPM				"assets/sprites/floor.xpm"
+# define FLOOR_UPDATE_XPM		"assets/sprites/floor_update.xpm"
+# define COLLECTABLE_XPM		"assets/sprites/collectable.xpm"
+# define COLLECTABLE_KILL_XPM	"assets/sprites/collectable_kill.xpm"
+# define PLAYER_FRONT_XPM		"assets/sprites/player/front.xpm"
+# define PLAYER_LEFT_XPM		"assets/sprites/player/left.xpm"
+# define PLAYER_RIGHT_XPM		"assets/sprites/player/right.xpm"
+# define PLAYER_BACK_XPM		"assets/sprites/player/back.xpm"
+# define EXIT_OPEN_XPM			"assets/sprites/exit-opened.xpm"
+# define EXIT_CLOSED_XPM		"assets/sprites/exit-closed.xpm"
 
-typedef struct s_game
+typedef struct s_g
 {
 	void	*mlx;
 	void	*win;
@@ -53,13 +57,15 @@ typedef struct s_game
 	int		map_height;
 	void	*img_player;
 	void	*img_floor;
+	void	*img_floor_update;
 	void	*img_wall;
 	void	*img_collectable;
+	void	*img_collectable_kill;
 	void	*img_exit;
 	int		img_width;
 	int		img_height;
-	int		x_player;
-	int		y_player;
+	int		xp;
+	int		yp;
 	int		screen_width;
 	int		screen_height;
 	int		n_ve;
@@ -69,24 +75,24 @@ typedef struct s_game
 	int		n_p;
 	int		moves;
 	int		finish;
-}		t_game;
+}		t_g;
 
-void	game_init(t_game *game);
-void	gameplay(t_game *game);
-int		draw_game(t_game *game);
-int		exit_game(t_game *game);
-int		check_win(t_game *game);
-char	**map_read(char *path, t_game *game);
-int		check_map(t_game *game);
+void	g_init(t_g *g);
+void	gplay(t_g *g);
+int		draw_g(t_g *g);
+int		exit_g(t_g *g);
+int		check_win(t_g *g);
+char	**map_read(char *path, t_g *g);
+int		check_map(t_g *g);
 
-void	w_key(t_game *game);
-void	s_key(t_game *game);
-void	d_key(t_game *game);
-void	a_key(t_game *game);
+void	w_key(t_g *g);
+void	s_key(t_g *g);
+void	d_key(t_g *g);
+void	a_key(t_g *g);
 
 void	free_map(char **map);
-void	print_error(char *str, t_game *game);
-void	print_win(t_game *game);
-void	get_win_size(t_game *game);
+void	print_error(char *str, t_g *g);
+void	print_win(t_g *g);
+void	get_win_size(t_g *g);
 
 #endif
