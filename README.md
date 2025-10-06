@@ -1,5 +1,7 @@
 # So_long
 
+## Overview
+
 Welcome to **So_long**! This project is a game written in C, developed as a part of the 42 curriculum. The goal of the game is to guide a character through a maze, collecting items and reaching the exit while avoiding obstacles.
 
 ## Features
